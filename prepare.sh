@@ -30,7 +30,7 @@ if ! grep 'ZEROCONF=yes' /etc/sysconfig/network; then
 fi
 
 rm rm /etc/resolv.conf
-yum clear all
+yum clean all
 
 dd if=/dev/zero of=file
 rm file
