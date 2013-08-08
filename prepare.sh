@@ -2,8 +2,10 @@
 user=${1:-ec2-user}
 chkconfig iptables off
 
-rpm -Uvh http://ftp.neowiz.com/fedora-epel/5/i386/epel-release-5-4.noarch.rpm
-yum install cloud-init
+if  ! which ec2metadata; then
+	rpm -Uvh http://ftp.neowiz.com/fedora-epel/5/i386/epel-release-5-4.noarch.rpm
+	yum install cloud-init
+fi
 
 useradd -m -s `which bash` ${user}
 
