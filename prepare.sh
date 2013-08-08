@@ -7,11 +7,11 @@ if ! rpm -qa | grep epel; then
 fi
 
 if ! which ec2metadata; then
-	yum install cloud-utils
+	yum install cloud-utils -y
 fi
 
 if ! which cloud-init; then
-	yum install cloud-init
+	yum install cloud-init -y
 fi
 
 useradd -m -s `which bash` ${cloud_user}
