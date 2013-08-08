@@ -1,5 +1,5 @@
 #!/bin/bash
-user=${1:-ec2-user}
+cloud_user=${CLOUD_USER:-ec2-user}
 chkconfig iptables off
 
 if ! which ec2metadata; then
@@ -7,13 +7,13 @@ if ! which ec2metadata; then
 	yum install cloud-init
 fi
 
-useradd -m -s `which bash` ${user}
+useradd -m -s `which bash` ${cloud_user}
 
-cat > /etc/sudoers.d/${user} << EOF
-${user} ALL=(ALL) NOPASSWD:ALL
+cat > /etc/sudoers.d/${cloud_user} << EOF
+${cloud_user} ALL=(ALL) NOPASSWD:ALL
 EOF
 
-chmod 0660 /etc/sudoers.d/${user}
+chmod 0660 /etc/sudoers.d/${cloud_user}
 
 cat > /etc/sysconfig/network-scripts/ifcfg-eth0 << EOF
 DEVICE=eth0
