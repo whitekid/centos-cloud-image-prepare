@@ -5,6 +5,8 @@ chkconfig iptables off
 rpm -Uvh http://ftp.neowiz.com/fedora-epel/5/i386/epel-release-5-4.noarch.rpm
 yum install cloud-init
 
+useradd -m -s `which bash` ${user}
+
 cat > /etc/sudoers.d/${user} << EOF
 ${user} ALL=(ALL) NOPASSWD:ALL
 EOF
