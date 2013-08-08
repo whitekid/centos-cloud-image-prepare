@@ -26,7 +26,7 @@ rm rm /etc/udev/rules.d/70-persistent-net.rules
 rm /etc/ssh/ssh_host*
 
 if ! grep 'ZEROCONF=yes' /etc/sysconfig/network; then
-	echo "ZEROCONF=yes\n" >> /etc/sysconfig/network
+	echo "ZEROCONF=yes" >> /etc/sysconfig/network
 fi
 
 rm rm /etc/resolv.conf
