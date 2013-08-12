@@ -1,7 +1,7 @@
 #!/bin/bash
 cloud_user=${CLOUD_USER:-ec2-user}
 chkconfig iptables off
-release=`lsb_release -s -s`
+release=`lsb_release -r -s`
 
 use_cloud_util=yes
 case $release in
