@@ -9,7 +9,7 @@ case $release in
 		epel_pkg=http://ftp.jaist.ac.jp/pub/Linux/Fedora/epel/5/i386/epel-release-5-4.noarch.rpm
 		use_cloud_util=no
 		;;
-	6.4)
+	6.*)
 		epel_pkg=http://ftp.jaist.ac.jp/pub/Linux/Fedora/epel/6/i386/epel-release-6-8.noarch.rpm
 		;;
 	*)
