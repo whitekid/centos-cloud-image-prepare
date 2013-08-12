@@ -34,7 +34,7 @@ useradd -m -s `which bash` ${cloud_user}
 case $release in
 	5.8)
 		if ! grep "^${cloud_user} :ALL" /etc/sysconfig/network; then
-			echo "${cloud_user} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers
+			echo "${cloud_user} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 		fi
 		;;
 	6.4)
