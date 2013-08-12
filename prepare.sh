@@ -37,7 +37,7 @@ case $release in
 			echo "${cloud_user} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 		fi
 		;;
-	6.4)
+	6.*)
 		echo "${cloud_user} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/${cloud_user}
 		chmod 0660 /etc/sudoers.d/${cloud_user}
 		;;
