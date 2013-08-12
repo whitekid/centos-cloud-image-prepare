@@ -1,12 +1,27 @@
 #!/bin/bash
 cloud_user=${CLOUD_USER:-ec2-user}
 chkconfig iptables off
+release=`lsb_release -s -s`
+
+use_cloud_util=yes
+case $release in
+	5.8)
+		epel_pkg=http://ftp.jaist.ac.jp/pub/Linux/Fedora/epel/5/i386/epel-release-5-4.noarch.rpm
+		use_cloud_util=no
+		;;
+	6.4)
+		epel_pkg=http://ftp.jaist.ac.jp/pub/Linux/Fedora/epel/6/i386/epel-release-6-8.noarch.rpm
+		;;
+	*)
+		echo "Unsupported release $release"
+		exit
+esac
 
 if ! rpm -qa | grep epel; then
-	rpm -Uvh http://ftp.neowiz.com/fedora-epel/5/i386/epel-release-5-4.noarch.rpm
+	rpm -Uvh $epel_pkg
 fi
 
-if ! which ec2metadata; then
+if ! which ec2metadata -a $use_cloud_util = 'yes' ; then
 	yum install cloud-utils -y
 fi
 
@@ -16,11 +31,17 @@ fi
 
 useradd -m -s `which bash` ${cloud_user}
 
-cat > /etc/sudoers.d/${cloud_user} << EOF
-${cloud_user} ALL=(ALL) NOPASSWD:ALL
-EOF
-
-chmod 0660 /etc/sudoers.d/${cloud_user}
+case $release in
+	5.8)
+		if ! grep "^${cloud_user} :ALL" /etc/sysconfig/network; then
+			echo "${cloud_user} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers
+		fi
+		;;
+	6.4)
+		echo "${cloud_user} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/${cloud_user}
+		chmod 0660 /etc/sudoers.d/${cloud_user}
+		;;
+esac
 
 cat > /etc/sysconfig/network-scripts/ifcfg-eth0 << EOF
 DEVICE=eth0
@@ -29,19 +50,19 @@ ONBOOT=yes
 BOOTPROTO=dhcp
 EOF
 
-rm rm /etc/udev/rules.d/70-persistent-net.rules
-rm /etc/ssh/ssh_host*
+rm -f /etc/udev/rules.d/70-persistent-net.rules
+rm -f /etc/ssh/ssh_host*
 
 if ! grep 'NOZEROCONF=yes' /etc/sysconfig/network; then
 	echo "NOZEROCONF=yes" >> /etc/sysconfig/network
 fi
 
-rm rm /etc/resolv.conf
+rm -f /etc/resolv.conf
 yum clean all
 
 dd if=/dev/zero of=file
-rm file
+rm -f file
 
-rm -f ~/.bash_history
 history -c
+rm -f ~/.bash_history
 
