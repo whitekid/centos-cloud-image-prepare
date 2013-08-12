@@ -21,7 +21,7 @@ if ! rpm -qa | grep epel; then
 	rpm -Uvh $epel_pkg
 fi
 
-if $use_cloud_util == 'no' -a ! which ec2metadata ; then
+if [ $use_cloud_util == 'no' -a ! which ec2metadata ]; then
 	yum install cloud-utils -y
 fi
 
