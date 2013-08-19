@@ -52,7 +52,7 @@ ONBOOT=yes
 BOOTPROTO=dhcp
 EOF
 
-rm -f /etc/udev/rules.d/70-persistent-net.rules
+rm -f /etc/udev/rules.d/70-persistent-*.rules
 rm -f /etc/ssh/ssh_host*
 
 if ! grep 'NOZEROCONF=yes' /etc/sysconfig/network; then
