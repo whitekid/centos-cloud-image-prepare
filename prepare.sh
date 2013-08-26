@@ -59,6 +59,7 @@ if ! grep 'NOZEROCONF=yes' /etc/sysconfig/network; then
 	echo "NOZEROCONF=yes" >> /etc/sysconfig/network
 fi
 
+rm -rf /var/lib/cloud
 rm -f /etc/resolv.conf
 yum clean all
 
