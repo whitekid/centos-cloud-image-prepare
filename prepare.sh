@@ -52,6 +52,12 @@ ONBOOT=yes
 BOOTPROTO=dhcp
 EOF
 
+# refer http://jcape.name/2009/07/17/distributing-static-routes-with-dhcp/
+if [ "$release" = "5.8" ]; then
+	curl -s https://raw.github.com/whitekid/centos-cloud-image-prepare/master/dhclient.conf > /etc/dhclient.conf
+	curl -s https://raw.github.com/whitekid/centos-cloud-image-prepare/master/dhclient-exit-hooks > /etc/dhclient-exit-hooks
+fi
+
 rm -f /etc/udev/rules.d/70-persistent-*.rules
 rm -f /etc/ssh/ssh_host*
 
