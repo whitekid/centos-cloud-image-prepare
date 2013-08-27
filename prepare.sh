@@ -17,7 +17,7 @@ case $release in
 		exit
 esac
 
-if ! rpm -qa | grep epel; then
+if ! rpm -qa | grep -q epel; then
 	rpm -Uvh $epel_pkg
 fi
 
@@ -35,7 +35,7 @@ useradd -m -s `which bash` ${cloud_user}
 
 case $release in
 	5.8)
-		if ! grep "^${cloud_user} :ALL" /etc/sysconfig/network; then
+		if ! grep -q "^${cloud_user} :ALL" /etc/sysconfig/network; then
 			echo "${cloud_user} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 		fi
 		;;
