@@ -60,6 +60,8 @@ fi
 
 rm -f /etc/udev/rules.d/70-persistent-*.rules
 rm -f /etc/ssh/ssh_host*
+rm -rf /home/$CLOUD_USER/.ssh
+rm -rf /root/.ssh
 
 if ! grep 'NOZEROCONF=yes' /etc/sysconfig/network; then
 	echo "NOZEROCONF=yes" >> /etc/sysconfig/network
