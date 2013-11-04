@@ -17,6 +17,7 @@ fi
 # cloud-init
 case "$OS" in
 	CentOS)
+		use_cloud_util=yes
 		case $REL in
 			5.8)
 				epel_pkg=http://ftp.jaist.ac.jp/pub/Linux/Fedora/epel/5/i386/epel-release-5-4.noarch.rpm
@@ -33,7 +34,7 @@ case "$OS" in
 			rpm -Uvh $epel_pkg
 		fi
 		
-		if [ $use_cloud_util == 'yes' ]; then
+		if [ "$use_cloud_util" == 'yes' ]; then
 			which ec2metadata || yum install cloud-utils -y
 		fi
 
