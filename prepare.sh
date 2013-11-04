@@ -84,6 +84,7 @@ rm -rf /var/lib/cloud
 rm -f /etc/resolv.conf
 yum clean all
 apt-get clean all
+rm -f /etc/apt/apt.conf
 
 # clear history
 history -c
