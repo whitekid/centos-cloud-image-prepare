@@ -72,8 +72,9 @@ esac
 
 # refer http://jcape.name/2009/07/17/distributing-static-routes-with-dhcp/
 if [ "$OS" == "CentOS" -a "$REL" == "5.8" ]; then
-	curl -s https://raw.github.com/whitekid/centos-cloud-image-prepare/master/dhclient.conf > /etc/dhclient.conf
-	curl -s https://raw.github.com/whitekid/centos-cloud-image-prepare/master/dhclient-exit-hooks > /etc/dhclient-exit-hooks
+	master=https://raw.github.com/whitekid/centos-cloud-image-prepare/master
+	curl -s ${master}/dhclient.conf > /etc/dhclient.conf
+	curl -s ${master}/dhclient-exit-hooks > /etc/dhclient-exit-hooks
 fi
 
 # remove persistents things
