@@ -70,7 +70,7 @@ EOF
 esac
 
 # refer http://jcape.name/2009/07/17/distributing-static-routes-with-dhcp/
-if [ "$OS" == "CentOS" && "$REL" == "5.8" ]; then
+if [ "$OS" == "CentOS" -a "$REL" == "5.8" ]; then
 	curl -s https://raw.github.com/whitekid/centos-cloud-image-prepare/master/dhclient.conf > /etc/dhclient.conf
 	curl -s https://raw.github.com/whitekid/centos-cloud-image-prepare/master/dhclient-exit-hooks > /etc/dhclient-exit-hooks
 fi
@@ -82,8 +82,8 @@ rm -rf /home/$cloud_user/.ssh
 rm -rf /root/.ssh
 rm -rf /var/lib/cloud
 rm -f /etc/resolv.conf
-yum clean all
-apt-get clean all
+which yum && yum clean all
+which apt-get && apt-get clean all
 rm -f /etc/apt/apt.conf
 
 # clear history
