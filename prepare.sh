@@ -79,6 +79,7 @@ fi
 
 # remove persistents things
 rm -f /etc/udev/rules.d/70-persistent-*.rules
+rm -f /lib/udev/rules.d/75-persistent-net-generator.rules
 rm -f /etc/ssh/ssh_host*
 rm -rf /home/$cloud_user/.ssh
 rm -rf /root/.ssh
