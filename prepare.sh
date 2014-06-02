@@ -70,6 +70,11 @@ EOF
 		;;
 esac
 
+# acpid
+yum install -y acpid
+chkconfig acpid on
+service acpid start
+
 # refer http://jcape.name/2009/07/17/distributing-static-routes-with-dhcp/
 if [ "$OS" == "CentOS" -a "$REL" == "5.8" ]; then
 	master=https://raw.github.com/whitekid/centos-cloud-image-prepare/master
